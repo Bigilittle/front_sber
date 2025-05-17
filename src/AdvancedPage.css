@@ -1,0 +1,313 @@
+/* AdvancedPage.css */
+/* Все селекторы переименованы с префиксом adv- */
+
+/* Основные контейнеры */
+@font-face {
+  font-family: 'Uncial Antiqua';
+  src: url('/fonts/UncialAntiqua-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab.ttf') format('truetype');
+}
+
+
+.adv-container {
+  padding: 20px;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: auto;
+}
+
+.adv-title {
+  font-family: 'Uncial Antiqua', cursive;  /* как на обычной странице */
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c1b18;
+}
+
+/* Список атак */
+.adv-attack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.adv-attack-block {
+  background: rgba(255,255,255,0.9);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Ряд полей */
+.adv-field-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.adv-field-row input,
+.adv-field-row select,
+.adv-attack-meta input,
+.adv-attack-meta select {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.adv-field-row input:focus,
+.adv-field-row select:focus,
+.adv-attack-meta input:focus,
+.adv-attack-meta select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255,140,0,0.3);
+}
+
+/* Мета-блок атаки */
+.adv-attack-meta {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+}
+
+/* Свитчер */
+.adv-toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 10px;
+}
+.adv-toggle-switch input[type="checkbox"] { display: none; }
+.adv-slider {
+  width: 40px; height: 22px;
+  background-color: #ccc;
+  border-radius: 999px;
+  position: relative;
+  transition: background-color .3s ease;
+}
+.adv-slider::before {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 18px; height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .3s ease;
+}
+.adv-toggle-switch input:checked + .adv-slider {
+  background-color: #2ecc71;
+}
+.adv-toggle-switch input:checked + .adv-slider::before {
+  transform: translateX(18px);
+}
+.adv-toggle-switch:hover .adv-slider {
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+}
+.adv-toggle-label { font-size: .95rem; }
+
+/* Кнопки */
+.adv-add-field-btn,
+.adv-add-btn,
+.adv-send-btn {
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff8c00;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background-color .2s ease;
+}
+.adv-add-field-btn:hover,
+.adv-add-btn:hover,
+.adv-send-btn:hover {
+  background-color: #e57700;
+}
+
+/* Обёртки */
+.adv-add-wrapper,
+.adv-send-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Урон-параметры */
+.adv-damage-row {
+  align-items: center;
+}
+.adv-delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #cc0000;
+  transition: color .2s ease;
+}
+.adv-delete-btn:hover { color: #ff0000; }
+
+.adv-select-wrapper {
+  width: 100%;
+  max-width: 250px;
+}
+
+/* Отзывчивость */
+@media (max-width: 800px) {
+  .adv-field-row,
+  .adv-field-row.adv-damage-row,
+  .adv-attack-meta .adv-field-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .adv-field-row input,
+  .adv-field-row select,
+  .adv-attack-meta input,
+  .adv-attack-meta select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .adv-damage-row .adv-delete-btn {
+    align-self: flex-start;
+    margin-top: 5px;
+    font-size: 1.4rem;
+    padding: 2px 8px;
+    display: block;
+  }
+}
+
+
+.adv-delete-attack-btn {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #cc0000;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.2s ease;
+}
+.adv-delete-attack-btn:hover {
+  color: #ff0000;
+}
+.adv-attack-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+.defense-settings {
+  background: rgba(255, 255, 255, 0.85); /* светлый полупрозрачный фон */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 30px 0; /* отступ сверху и снизу */
+  width: 100%;
+  max-width: 600px; /* чтобы не растягивалось на весь экран */
+}
+
+.defense-settings h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.defense-settings h3 {
+  font-size: 1.4rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* Стиль для полей ввода и select */
+.defense-settings input[type="number"],
+.defense-settings input[type="text"],
+.defense-settings select {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-top: 5px;
+}
+
+.defense-settings input[type="number"]:focus,
+.defense-settings input[type="text"]:focus,
+.defense-settings select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3);
+}
+
+/* Стиль для строки (подпись + инпут) */
+.defense-settings .field-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+
+
+/* Селектор выбора характеристики для спасброска */
+.adv-save-type-select {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  margin-top: 10px;
+}
+
+.adv-save-type-select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.3);
+}
+
+.adv-toggle-wrapper {
+  margin-top: 10px;
+}
+
+
+
+.adv-back-link {
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 30px;
+}
+
+.adv-back-link button {
+  font-size: 14px;
+  background: none;
+  color: rgba(0, 0, 0, 0.6);
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.adv-back-link button:hover {
+  color: rgba(0, 0, 0, 0.8);
+}

@@ -1,0 +1,20 @@
+
+.crud-body {
+
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto Slab', serif;
+    background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b); /* тёпло-алый → жёлтый */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .charts-body {
+    background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b);;
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }

@@ -1,0 +1,173 @@
+@font-face {
+  font-family: 'Uncial Antiqua';
+  src: url('/fonts/UncialAntiqua-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto Slab';
+  src: url('/fonts/RobotoSlab.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Slab', serif;
+  background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b);
+}
+
+body {
+  padding: 20px 0 0 0; 
+  display: block; 
+}
+
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.85); 
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.center-text {
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  color: #2c1b18;
+}
+
+
+.dice-list {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.dice-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+
+.dice-item input {
+  padding: 8px;
+  font-size: 16px;
+  width: 150px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+.dice-item input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+
+.dice-item input[style*="red"] {
+  border-color: red !important;
+  background-color: #ffe5e5;
+}
+
+
+.dice-item button {
+  margin-left: 10px;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  font-size: 18px;
+  line-height: 28px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.dice-item button:hover {
+  background-color: #d60000;
+}
+
+.dice-item button::before {
+  content: '×';
+}
+
+
+button.add-btn,
+.calculate button {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid #555; 
+  margin-bottom: 10px;
+}
+
+
+button.add-btn:hover,
+.calculate button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+
+.calculate button {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  color: #333;
+  transition: background 0.3s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.calculate button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-1px);
+}
+
+
+.advanced-link {
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+.advanced-link button {
+  font-size: 14px;
+  background: none;
+  color: rgba(0,0,0,0.6);
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.advanced-link button:hover {
+  color: rgba(0,0,0,0.8);
+}

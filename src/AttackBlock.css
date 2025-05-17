@@ -1,0 +1,174 @@
+/* глобальный сброс box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'ElMessiri', sans-serif;
+}
+
+.attack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.attack-block {
+  position: relative;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  width: 100%;           /* всегда 100% родителя */
+  transition: all 0.3s ease;
+}
+
+/* кнопка удаления блока */
+.delete-attack-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  font-size: 1.2rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.field-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+/* для damage-row — то же, что field-row */
+.damage-row {
+  flex-wrap: wrap;
+}
+
+/* единый стиль для native select и input */
+
+.field-row select,
+.field-row input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field-row input:focus,
+.field-row select:focus {
+  border-color: #ff8c00;
+  box-shadow: 0 0 0 3px rgba(255,140,0,0.3);
+}
+
+/* react-select wrapper */
+.select-wrapper { display: none; }
+
+/* toggle switch */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  user-select: none;
+  cursor: pointer;
+}
+.toggle-switch input[type="checkbox"] {
+  display: none;
+}
+.toggle-switch .slider {
+  width: 40px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 999px;
+  position: relative;
+  transition: background 0.3s;
+}
+.toggle-switch .slider::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+.toggle-switch input:checked + .slider {
+  background: #2ecc71;
+}
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+.toggle-label {
+  font-size: 0.95rem;
+}
+
+/* кнопки */
+.add-field-btn,
+.add-btn,
+.send-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 1rem;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #ff8c00;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.add-field-btn:hover,
+.add-btn:hover,
+.send-btn:hover {
+  background-color: #e57700;
+}
+
+.add-wrapper,
+.send-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #cc0000;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.delete-btn:hover {
+  color: #ff0000;
+}
+
+@media (max-width: 600px) {
+  .field-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
