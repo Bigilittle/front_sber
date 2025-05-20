@@ -40,11 +40,30 @@ function App() {
   }, []); 
 
   useEffect(() => {
-    document.body.className = location.pathname === '/charts'
-      ? 'charts-body'
-      : 'crud-body';
-    return () => { document.body.className = ''; };
+    const root = document.getElementById('root');
+    
+    // обновляем классы на root
+    if (location.pathname === '/') {
+      root.classList.add('crud-mode');
+      root.classList.remove('charts-mode');
+    } else {
+      root.classList.remove('crud-mode');
+      root.classList.add('charts-mode');
+    }
+  
+    // одновременно обновляем классы на body
+    document.body.className =
+      location.pathname === '/charts'
+        ? 'charts-body'
+        : 'crud-body';
+  
+    return () => {
+      root.classList.remove('crud-mode', 'charts-mode');
+      document.body.className = '';
+    };
   }, [location]);
+  
+  
 
   return (
     <AssistantContext.Provider value={assistant}>

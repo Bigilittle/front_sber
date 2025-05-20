@@ -10,7 +10,7 @@
     padding: 10px;
   }
   
-  .charts-body {
+.charts-body {
     background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b);;
     font-family: 'Georgia', serif;
     margin: 0;
@@ -18,3 +18,18 @@
     height: 100%;
     width: 100%;
   }
+
+
+
+#root.crud-mode {
+  height: 100%;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+#root.charts-mode {
+  width: 100%;
+  display: block;
+}
