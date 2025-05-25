@@ -199,8 +199,66 @@ button.add-btn:hover {
 
 
 @media (max-width: 400px) {
-  .root.crud-mode {
+  .container {
     width: 98vw;       /* почти вся ширина экрана */
     padding: 20px 4vw; /* немного уменьшаем отступы */
   }
+  .crud-mode
+  .container {
+    width: 98vw;       /* почти вся ширина экрана */
+    padding: 20px 4vw; /* немного уменьшаем отступы */
+  }
+}
+
+.zoom-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.zoom-step {
+  font-size: 1.12rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.zoom-input {
+  width: 60px;
+  padding: 5px 8px;
+  border-radius: 7px;
+  border: 1px solid #c0b6d4;
+  font-size: 1.14rem;
+  text-align: center;
+  margin-left: 3px;
+  transition: border-color 0.2s;
+}
+.zoom-input:focus {
+  border-color: #8842d5;
+  outline: none;
+}
+.zoom-current {
+  font-size: 1.17rem;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.zoom-btn {
+  width: 220px;
+  padding: 12px 0;
+  margin: 7px 0 0 0;
+  border: none;
+  border-radius: 12px;
+  background: #712baf;
+  color: #fff;
+  font-size: 1.12rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+.zoom-btn:hover {
+  background: #531881;
+  transform: translateY(-2px);
 }

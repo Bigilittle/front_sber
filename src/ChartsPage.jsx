@@ -33,22 +33,81 @@ export default function ChartsPage() {
   const chartData = prepareChartData(result);
   const [visibleGraphs, setVisibleGraphs] = useState(result.map(() => true));
 
-  function toggleGraph(idx) {
-    const updated = [...visibleGraphs];
-    updated[idx] = !updated[idx];
-    setVisibleGraphs(updated);
+  // --- Масштаб и шаг ---
+  const [zoomStep, setZoomStep] = useState(10); // шаг в %
+  const [zoomInput, setZoomInput] = useState('10'); // строка для input (разделено, чтобы юзер мог стереть)
+  const [scale, setScale] = useState(100); // текущий масштаб в %
+
+  function handleInputChange(e) {
+    const val = e.target.value;
+    // Даём юзеру стирать поле, не мешаем
+    if (/^\d{0,3}$/.test(val)) {
+      setZoomInput(val);
+    }
   }
 
+  // Сохраняем шаг только при потере фокуса или Enter
+  function commitStepChange() {
+    let num = parseInt(zoomInput, 10);
+    if (isNaN(num) || num <= 0) num = zoomStep; // Не сохраняем мусор, оставляем старое значение
+    setZoomStep(num);
+    setZoomInput(num.toString());
+  }
+
+  function handleInputBlur() {
+    commitStepChange();
+  }
+
+  function handleInputKeyDown(e) {
+    if (e.key === 'Enter') {
+      commitStepChange();
+    }
+  }
+
+  function handleDecrease() {
+    setScale(prev => Math.max(10, prev - zoomStep));
+  }
+  function handleIncrease() {
+    setScale(prev => Math.min(300, prev + zoomStep));
+  }
+
+  function toggleGraph(idx) {
+    setVisibleGraphs(prev => {
+      const updated = [...prev];
+      updated[idx] = !updated[idx];
+      return updated;
+    });
+  }
+
+  // --- Команды ассистента ---
   const handleAICommand = (action) => {
-    if (action.type === 'adv_back_simple') {
-      navigate('/');
+    switch (action.type) {
+      case 'adv_back_simple':
+        navigate('/');
+        break;
+      case 'zoom_set_step': {
+        const val = parseInt(action.value, 10);
+        if (!isNaN(val) && val > 0) {
+          setZoomStep(val);
+          setZoomInput(val.toString());
+        }
+        break;
+      }
+      case 'zoom_increase':
+        handleIncrease();
+        break;
+      case 'zoom_decrease':
+        handleDecrease();
+        break;
+      default:
+        break;
     }
   };
 
   useEffect(() => {
     if (!assistant) return;
-    const unsubStart = assistant.on('start', () => console.log('🟢 Ассистент Charts активирован'));
-    const unsubError = assistant.on('error', err => console.error('❌ Ошибка ассистента Charts:', err));
+    const unsubStart = assistant.on('start', () => {});
+    const unsubError = assistant.on('error', () => {});
     const unsubData = assistant.on('data', message => {
       if (message.type === 'smart_app_data' && message.action) {
         handleAICommand(message.action);
@@ -102,9 +161,41 @@ export default function ChartsPage() {
         })}
       </div>
 
+      {/* --- Зум-контролы --- */}
+      <div className="zoom-panel">
+        <label className="zoom-step">
+          Шаг изменения:&nbsp;
+          <input
+            type="text"
+            min="1"
+            max="100"
+            step="1"
+            value={zoomInput}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            onKeyDown={handleInputKeyDown}
+            className="zoom-input"
+            inputMode="numeric"
+            pattern="[0-9]*"
+          />%
+        </label>
+        <div className="zoom-current">
+          Общий показатель масштаба: <b>{scale}%</b>
+        </div>
+        <button className="zoom-btn" onClick={handleDecrease}>Уменьшить масштаб</button>
+        <button className="zoom-btn" onClick={handleIncrease}>Увеличить масштаб</button>
+      </div>
+
       <div className="chart-scroll-wrapper">
-        <div className="chart-fixed-width">
-          <ResponsiveContainer width="100%" height={500}>
+        <div
+          className="chart-fixed-width"
+          style={{
+            width: `${800 * scale / 100}px`,
+            height: `${500 * scale / 100}px`,
+            minWidth: `${800 * scale / 100}px`,
+            minHeight: `${500 * scale / 100}px`
+          }}>
+          <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
               <XAxis dataKey="name" />
               <YAxis />
