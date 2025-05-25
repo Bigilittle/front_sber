@@ -1,23 +1,22 @@
-
 .crud-body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Roboto Slab', serif;
+  background: linear-gradient(to bottom left, #410e6e, #2f1919); /* фиолетовый → чёрный → белый */
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
 
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto Slab', serif;
-    background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b); /* тёпло-алый → жёлтый */
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
-  
 .charts-body {
-    background: linear-gradient(to bottom right, #ff4d4d, #ffeb3b);;
-    font-family: 'Georgia', serif;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-  }
+  background: linear-gradient(to bottom left, #410e6e, #2f1919); /* тот же градиент */
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0; 
+  height: 100%;
+  width: 100%;
+}
+
 
 
 

@@ -82,13 +82,18 @@ export default function ChartsPage() {
               key={idx}
               onClick={() => toggleGraph(idx)}
               style={{
-                background: visibleGraphs[idx] ? generateColor(idx) : '#ccc',
-                color: '#fff',
-                margin: '0 5px',
-                padding: '5px 10px',
-                borderRadius: '5px',
+                background: visibleGraphs[idx] ? generateColor(idx) : "#e5e7eb",
+                color: visibleGraphs[idx] ? "#fff" : "#333",
+                margin: '8px 10px',
+                minWidth: 180,
+                minHeight: 48,
+                fontSize: '1.15rem',
+                fontWeight: 600,
+                borderRadius: '12px',
                 border: 'none',
-                cursor: 'pointer'
+                boxShadow: "0 2px 8px rgba(106,13,173,0.10)",
+                cursor: "pointer",
+                transition: "background 0.2s, color 0.2s, transform 0.1s"
               }}
             >
               {label}

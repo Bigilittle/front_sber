@@ -13,7 +13,7 @@ function CrudPage() {
   const [shouldSend, setShouldSend] = useState(false);
   const navigate = useNavigate();
 
-  const dicePattern = /^(\d+([dk]\d+)?)(\+(\d+([dk]\d+)?))*$/i;
+  const dicePattern = /^-?(\d+([dk]\d+)?)([+-](\d+([dk]\d+)?))*$/i;
 
   function handleAdd() {
     setDiceList(prev => [...prev, '']);

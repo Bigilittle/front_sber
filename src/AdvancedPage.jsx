@@ -19,6 +19,48 @@ const SAVE_STATS = [
   "Сила", "Ловкость", "Телосложение", "Интеллект", "Мудрость", "Харизма"
 ];
 
+const customStyles = {
+  control: (base, state) => ({
+    ...base,
+    backgroundColor: '#ffffff',
+    borderColor: state.isFocused ? '#a95cf7' : '#ccc',
+    boxShadow: state.isFocused ? '0 0 0 3px rgba(169, 92, 247, 0.4)' : 'none',
+    '&:hover': {
+      borderColor: '#a95cf7'
+    }
+  }),
+  menu: (base) => ({
+    ...base,
+    backgroundColor: '#fff',
+    zIndex: 9999
+  }),
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected
+      ? '#6a0dad'
+      : state.isFocused
+      ? '#e0d4ff'
+      : '#fff',
+    color: state.isSelected ? 'white' : 'black',
+    cursor: 'pointer'
+  }),
+  singleValue: (base) => ({
+    ...base,
+    color: '#2c1b18',
+  }),
+  placeholder: (base) => ({
+    ...base,
+    color: '#888',
+  }),
+  dropdownIndicator: (base, state) => ({
+    ...base,
+    color: state.isFocused ? '#a95cf7' : '#888',
+    '&:hover': {
+      color: '#a95cf7'
+    }
+  }),
+};
+
 export default function AdvancedPage() {
   const assistant = useContext(AssistantContext);
   const navigate = useNavigate();
@@ -34,7 +76,7 @@ export default function AdvancedPage() {
   };
   const [defenseSettings, setDefenseSettings] = useState(initialDefense);
 
-  const dicePattern = /^(\d+([dk]\d+)?)(\+(\d+([dk]\d+)?))*$/i;
+  const dicePattern = /^-?(\d+([dk]\d+)?)([+-](\d+([dk]\d+)?))*$/i;
 
   const setKb = (value) => {
     setDefenseSettings(prev => ({
@@ -140,12 +182,12 @@ export default function AdvancedPage() {
       .catch(() => alert('Ошибка при отправке данных!'));
   };
 
-  useEffect(() => {
-    if (shouldSend) {
-      handleSend();
-      setShouldSend(false);
-    }
-  }, [defenseSettings, attacks, shouldSend]);
+  // useEffect(() => {
+  //   if (shouldSend) {
+  //     handleSend();
+  //     setShouldSend(false);
+  //   }
+  // }, [defenseSettings, attacks, shouldSend]);
 
   const handleAICommand = (action) => {
     switch (action.type) {
@@ -362,6 +404,7 @@ export default function AdvancedPage() {
                         ? { value: p.type, label: p.type }
                         : null
                     }
+                    styles={customStyles}
                     onChange={sel=>handleParamChange(attack.id,idx,'type',sel?.value||'')}
                     isClearable
                   />
