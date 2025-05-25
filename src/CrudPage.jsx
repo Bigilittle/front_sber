@@ -12,6 +12,8 @@ function CrudPage() {
   const [errors, setErrors] = useState({});
   const [shouldSend, setShouldSend] = useState(false);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const dicePattern = /^-?(\d+([dk]\d+)?)([+-](\d+([dk]\d+)?))*$/i;
 
@@ -44,6 +46,7 @@ function CrudPage() {
     if (Object.values(errors).some(Boolean)) {
       return alert('Проверь введённые значения кубов!');
     }
+    setIsLoading(true);
     fetch(`${API_URL}/calculation_dumb`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -53,7 +56,8 @@ function CrudPage() {
       .then(data => {
         navigate('/charts', { state: { result: data, diceList } });
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setIsLoading(false));
   }
 
   const handleAICommand = (action) => {
@@ -159,7 +163,13 @@ function CrudPage() {
       </div>
       <button className="add-btn" onClick={handleAdd}>+ Добавить куб</button>
       <div className="calculate">
-        <button onClick={handleCalculate}>Рассчитать урон...</button>
+        <button onClick={handleCalculate} disabled={isLoading}>
+          {isLoading ? (
+            <span className="loader"></span>
+          ) : (
+            'Рассчитать урон...'
+          )}
+        </button>
       </div>
     </div>
   );

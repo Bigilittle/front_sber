@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import './ChartsPage.css';
 import { AssistantContext } from './App';
+import { normalizeDice } from './normalizeDice';
 
 function generateColor(index) {
   const hue = (index * 137.508) % 360;
@@ -86,7 +87,7 @@ export default function ChartsPage() {
         navigate('/');
         break;
       case 'zoom_set_step': {
-        const val = parseInt(action.value, 10);
+        const val = parseInt(normalizeDice(action.value), 10);
         if (!isNaN(val) && val > 0) {
           setZoomStep(val);
           setZoomInput(val.toString());

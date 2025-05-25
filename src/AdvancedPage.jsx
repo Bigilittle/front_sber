@@ -68,6 +68,7 @@ export default function AdvancedPage() {
   const [attacks, setAttacks] = useState([]);
   const [errors, setErrors] = useState({});
   const [shouldSend, setShouldSend] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialDefense = {
     kb: '',
@@ -164,12 +165,13 @@ export default function AdvancedPage() {
     }
 
     const payload = {
-    ...defenseSettings,
-    saves: Object.fromEntries(
-      Object.entries(defenseSettings.saves).map(([k, v]) => [k, Number(v) || 0])
+      ...defenseSettings,
+      saves: Object.fromEntries(
+        Object.entries(defenseSettings.saves).map(([k, v]) => [k, Number(v) || 0])
       )
     };
 
+    setIsLoading(true);
     fetch(`${API_URL}/calculation_advanced`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -179,7 +181,8 @@ export default function AdvancedPage() {
       .then(data =>
         navigate('/charts', { state: { result: data, attacks, defenseSettings } })
       )
-      .catch(() => alert('Ошибка при отправке данных!'));
+      .catch(() => alert('Ошибка при отправке данных!'))
+      .finally(() => setIsLoading(false));
   };
 
   // useEffect(() => {
@@ -426,7 +429,16 @@ export default function AdvancedPage() {
       <DefenseSettings settings={defenseSettings} onChange={setDefenseSettings} />
 
       <div className="adv-send-wrapper">
-        <button onClick={handleSend} className="adv-send-btn">Отправить данные</button>
+        <button 
+          onClick={handleSend}
+          className="adv-send-btn"
+          disabled={isLoading}
+        >
+          {isLoading
+            ? <span className="loader"></span>
+            : "Отправить данные"
+          }
+        </button>
       </div>
       <div style={{ height: 300 }} />
     </div>
