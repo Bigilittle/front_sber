@@ -1,14 +1,17 @@
 .container-graph {
-    width: 80%;
-    max-width: 1200px;
-    margin: 20px auto;
-    height: auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-  }
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  padding-bottom: 100px; /* 🔧 Добавлено: больше пространства внизу */
+  background: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  min-height: 100vh; /* 🔧 Добавлено: гарантирует, что блок не сжимается по содержимому */
+  display: flex;
+  flex-direction: column;
+}
   
 .title-graph {
     font-size: 28px;
@@ -50,6 +53,6 @@
 
 @media (max-width: 600px) {
   .container-graph {
-    margin-bottom: 150px; /* чтобы учесть панель ассистента */
+    margin-bottom: 175px; /* чтобы учесть панель ассистента */
   }
 }

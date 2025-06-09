@@ -177,7 +177,8 @@ button.add-btn:hover {
     max-width: 98vw;
     min-width: 0;
     padding: 22px 7vw 18px 7vw;
-    margin: 25px auto 0 auto;
+    margin: 0px auto 150px auto;
+    
   }
   .center-text {
     font-size: 1.6rem;
@@ -198,10 +199,11 @@ button.add-btn:hover {
 }
 
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
   .container {
     width: 98vw;       /* почти вся ширина экрана */
     padding: 20px 4vw; /* немного уменьшаем отступы */
+    margin-bottom: 150px; /* чтобы учесть панель ассистента */
   }
   .crud-mode
   .container {
@@ -277,4 +279,9 @@ button.add-btn:hover {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+
+.footer {
+  height: 150px;
 }

@@ -171,6 +171,7 @@ function CrudPage() {
           )}
         </button>
       </div>
+      <div className="footer"></div>
     </div>
   );
 }
