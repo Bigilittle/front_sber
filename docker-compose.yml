@@ -1,0 +1,9 @@
+services:
+  frontend:
+    build: .
+    ports:
+      - "3000:80"
+    container_name: sber_frontend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production 
